@@ -1,0 +1,34 @@
+{
+	"schemaVersion": 1,
+	"id": "lweapon",
+	"version": "${version}",
+	"name": "Lumi's Weapons",
+	"description": "heh.. get ready to start sucking -drlacal",
+	"authors": [
+		"lumi luminyra"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/lweapon/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.luminyra.lweapon.LumisWeapons"
+		],
+		"fabric-datagen": [
+			"net.luminyra.lweapon.LumisWeaponsDataGenerator"
+		]
+	},
+	"mixins": [
+		"lweapon.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.15.11",
+		"minecraft": "~26.1.2",
+		"java": ">=25",
+		"fabric-api": "*"
+	}
+}
