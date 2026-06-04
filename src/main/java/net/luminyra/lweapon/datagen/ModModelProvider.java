@@ -20,5 +20,11 @@ public class ModModelProvider extends FabricModelProvider {
     @Override
     public void generateItemModels(ItemModelGenerators itemModelGenerators) {
         itemModelGenerators.generateFlatItem(ModItems.NIPZIUM_INGOT, ModelTemplates.FLAT_ITEM);
+
+        itemModelGenerators.generateFlatItem(ModItems.HEAVY_LIGHT, ModelTemplates.FLAT_ITEM);
+
+        //itemModelGenerators.declareCustomModelItem(ModItems.HEAVY_LIGHT);
+
+        //bro im actuall y gonig to kill a small child im goin im to im actually going to do it this time
     }
 }
