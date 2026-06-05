@@ -24,7 +24,7 @@ import static net.minecraft.world.item.Item.BASE_ATTACK_SPEED_ID;
 public class ModItems {
     public static final Item NIPZIUM_INGOT = registerItem("nipzium_ingot", Item::new);
     public static final Item HEAVY_LIGHT = registerItem("heavy_light",
-            properties -> new HeavyLight(properties.attributes(ItemAttributeModifiers.builder().add(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_ID, (double)8.0F, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND).add(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_ID, (double)-2.9F, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND).build()), properties.rarity(Rarity.EPIC)));
+            properties -> new HeavyLight(properties.attributes(ItemAttributeModifiers.builder().add(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_ID, (double)9.0F, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND).add(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_ID, (double)-3.3F, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND).build()), properties.rarity(Rarity.EPIC)));
 
     private static Item registerItem(String name, Function<Item.Properties, Item> function) {
         return Registry.register(BuiltInRegistries.ITEM, Identifier.fromNamespaceAndPath(LumisWeapons.MOD_ID, name),
