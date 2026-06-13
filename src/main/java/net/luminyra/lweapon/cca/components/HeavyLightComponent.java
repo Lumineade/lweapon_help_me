@@ -26,6 +26,13 @@ public class HeavyLightComponent extends PlayerComponent implements ServerTickin
 
     public float playerAttackStrengthScale;
 
+    //CHANGE THESE LUMI
+    public final int LIGHT_ADDITION = 5;
+    public final int INITIAL_WAIT_TICKS = 20;
+    public final int TICKS_UNTIL_DRAIN = 20;
+    public final int LIGHT_THRESHOLD = 150;
+    public final int TICKS_UNTIL_EXPLOSION = 30;
+
     //Dying Light Passive end
 
     public HeavyLightComponent(Player owner) {
@@ -66,9 +73,9 @@ public class HeavyLightComponent extends PlayerComponent implements ServerTickin
                 if (lwaitage > 1) lwaitage--;
             }
         }
-        if (light > 150) {
+        if (light > LIGHT_THRESHOLD) {
             warnTicks++;
-            if (warnTicks > 30) {
+            if (warnTicks > TICKS_UNTIL_EXPLOSION) {
                 lightExplosion();
                 reset();
             }
@@ -97,8 +104,8 @@ public class HeavyLightComponent extends PlayerComponent implements ServerTickin
     }
 
     public void addLight(int amount) {
-        initlwaitticks = 20;
-        lwaitticks = 20;
+        initlwaitticks = TICKS_UNTIL_DRAIN;
+        lwaitticks = INITIAL_WAIT_TICKS;
         lwaitage = 0;
         ldrainage = 0;
         light += (int) (amount * playerAttackStrengthScale);
