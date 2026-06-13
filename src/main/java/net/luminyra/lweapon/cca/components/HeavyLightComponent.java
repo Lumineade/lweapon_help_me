@@ -33,6 +33,7 @@ public class HeavyLightComponent extends PlayerComponent implements ServerTickin
     public final int LIGHT_THRESHOLD = 120;
     public final int TICKS_UNTIL_EXPLOSION = 30; //how many ticks until explosion after reaching threshold
     public final int DRAIN_SPEED = 5;
+    public final int MAX_DRAIN_REDUCTION = 3;
 
     //Dying Light Passive end
 
@@ -69,7 +70,7 @@ public class HeavyLightComponent extends PlayerComponent implements ServerTickin
             }
         } else {
             ldrainage++;
-            if (light > 0 && ldrainage % lwaitage == 0 && ldrainage % DRAIN_SPEED == 0) {
+            if (light > 0 && ldrainage % lwaitage == 0 && ldrainage % DRAIN_SPEED - ((int) (MAX_DRAIN_REDUCTION * light/100)) == 0) {
                 light--;
                 if (lwaitage > 1) lwaitage--;
             }
