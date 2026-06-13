@@ -48,7 +48,7 @@ public class HeavyLight extends Item {
         if (attacker instanceof Player player) {
         if (ModEntityComponents.HEAVY_LIGHT_COMPONENT.isProvidedBy(player)) {
             HeavyLightComponent heavyLightComponent = ModEntityComponents.HEAVY_LIGHT_COMPONENT.get(player);
-            heavyLightComponent.addLight(10);
+            heavyLightComponent.addLight(heavyLightComponent.LIGHT_ADDITION);
         }
         }
     }
