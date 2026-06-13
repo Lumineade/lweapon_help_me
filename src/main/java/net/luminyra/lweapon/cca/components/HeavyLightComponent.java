@@ -27,11 +27,12 @@ public class HeavyLightComponent extends PlayerComponent implements ServerTickin
     public float playerAttackStrengthScale;
 
     //CHANGE THESE LUMI
-    public final int LIGHT_ADDITION = 5;
-    public final int INITIAL_WAIT_TICKS = 20;
-    public final int TICKS_UNTIL_DRAIN = 20;
-    public final int LIGHT_THRESHOLD = 150;
-    public final int TICKS_UNTIL_EXPLOSION = 30;
+    public final int LIGHT_ADDITION = 12;
+    public final int INITIAL_WAIT_TICKS = 0;
+    public final int TICKS_UNTIL_DRAIN = 1; //how many ticks until full drain
+    public final int LIGHT_THRESHOLD = 120;
+    public final int TICKS_UNTIL_EXPLOSION = 30; //how many ticks until explosion after reaching threshold
+    public final int DRAIN_SPEED = 5;
 
     //Dying Light Passive end
 
@@ -59,7 +60,7 @@ public class HeavyLightComponent extends PlayerComponent implements ServerTickin
         //Dying Light Passive start
 
         if (owner.getAttackStrengthScale(0f) > playerAttackStrengthScale) playerAttackStrengthScale = owner.getAttackStrengthScale(0f);
-        owner.getAttribute(Attributes.ATTACK_SPEED).addOrUpdateTransientModifier(new AttributeModifier(LumisWeapons.id("light"), 1 * ((double) light / 100), AttributeModifier.Operation.ADD_VALUE));
+        owner.getAttribute(Attributes.ATTACK_SPEED).addOrUpdateTransientModifier(new AttributeModifier(LumisWeapons.id("light"), 0.8 * ((double) light / 100), AttributeModifier.Operation.ADD_VALUE));
         if (initlwaitticks > 0) {
             lwaitage++;
             initlwaitticks--;
@@ -68,7 +69,7 @@ public class HeavyLightComponent extends PlayerComponent implements ServerTickin
             }
         } else {
             ldrainage++;
-            if (light > 0 && ldrainage % lwaitage == 0) {
+            if (light > 0 && ldrainage % lwaitage == 0 && ldrainage % DRAIN_SPEED == 0) {
                 light--;
                 if (lwaitage > 1) lwaitage--;
             }
@@ -91,7 +92,7 @@ public class HeavyLightComponent extends PlayerComponent implements ServerTickin
 
     private void lightExplosion() {
         //Todo: make an actual explosion
-        owner.level().explode(owner, owner.getX(), owner.getY(), owner.getZ(),50, false, Level.ExplosionInteraction.MOB);
+        owner.level().explode(owner, owner.getX(), owner.getY(), owner.getZ(),4, false, Level.ExplosionInteraction.MOB);
     }
 
     private void reset() {
