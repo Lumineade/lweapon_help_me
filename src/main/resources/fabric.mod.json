@@ -20,6 +20,9 @@
 		],
 		"fabric-datagen": [
 			"net.luminyra.lweapon.LumisWeaponsDataGenerator"
+		],
+		"cardinal-components-entity": [
+			"net.luminyra.lweapon.cca.index.ModEntityComponents"
 		]
 	},
 	"mixins": [
@@ -30,5 +33,10 @@
 		"minecraft": "~26.1.2",
 		"java": ">=25",
 		"fabric-api": "*"
+	},
+	"custom": {
+		"cardinal-components": [
+			"lweapon:heavy_light_component"
+		]
 	}
 }

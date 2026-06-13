@@ -1,7 +1,10 @@
 package net.luminyra.lweapon.Item.custom;
 
 
+import net.luminyra.lweapon.cca.components.HeavyLightComponent;
+import net.luminyra.lweapon.cca.index.ModEntityComponents;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -40,32 +43,17 @@ public class HeavyLight extends Item {
         return new Tool(List.of(), 1.0F, 2, false);
     }
 
-    public void hurtEnemy(final ItemStack itemStack, final LivingEntity mob, final LivingEntity attacker) {
-        if (canSmashAttack(attacker)) {
-            ServerLevel level = (ServerLevel)attacker.level();
-            attacker.setDeltaMovement(attacker.getDeltaMovement().with(Direction.Axis.Y, (double)0.01F));
-            attacker.setIgnoreFallDamageFromCurrentImpulse(true, this.calculateImpactPosition(attacker));
-            if (attacker instanceof ServerPlayer) {
-                ServerPlayer player = (ServerPlayer)attacker;
-                player.connection.send(new ClientboundSetEntityMotionPacket(player));
-            }
-
-            if (mob.onGround()) {
-                if (attacker instanceof ServerPlayer) {
-                    ServerPlayer player = (ServerPlayer)attacker;
-                    player.setSpawnExtraParticlesOnFall(true);
-                }
-
-                SoundEvent sound = attacker.fallDistance > (double)5.0F ? SoundEvents.MACE_SMASH_GROUND_HEAVY : SoundEvents.MACE_SMASH_GROUND;
-                level.playSound((Entity)null, attacker.getX(), attacker.getY(), attacker.getZ(), sound, attacker.getSoundSource(), 1.0F, 1.0F);
-            } else {
-                level.playSound((Entity)null, attacker.getX(), attacker.getY(), attacker.getZ(), SoundEvents.MACE_SMASH_AIR, attacker.getSoundSource(), 1.0F, 1.0F);
-            }
-
-            knockback(level, attacker, mob);
+    @Override
+    public void hurtEnemy(ItemStack itemStack, LivingEntity mob, LivingEntity attacker) {
+        if (attacker instanceof Player player) {
+        if (ModEntityComponents.HEAVY_LIGHT_COMPONENT.isProvidedBy(player)) {
+            HeavyLightComponent heavyLightComponent = ModEntityComponents.HEAVY_LIGHT_COMPONENT.get(player);
+            heavyLightComponent.addLight(10);
         }
-
+        }
     }
+
+
 
     private Vec3 calculateImpactPosition(final LivingEntity attacker) {
         return attacker.isIgnoringFallDamageFromCurrentImpulse() && attacker.currentImpulseImpactPos.y <= attacker.position().y ? attacker.currentImpulseImpactPos : attacker.position();
